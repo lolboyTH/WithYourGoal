@@ -1,0 +1,113 @@
+:root{
+    --base-color: #004e7f;
+    --text-color: white;
+    --text-shadow-color: rgb(0, 0, 0);
+    --box-shadow-color: rgb(0, 0, 0, 0.7);
+}
+body.darkmode{
+    --base-color: #3D4459;
+    --text-color: white;
+    --text-shadow-color: rgb(0, 0, 0);
+    --box-shadow-color: rgb(0, 0, 0, 0.7);
+}
+header {
+    text-align: center; 
+    padding: 2em 20px; 
+    margin-top: 2em;
+}
+
+h1{
+    font-size: 8rem;
+    text-shadow: 0 2px 5px var(--text-shadow-color);
+    color: var(--text-color);
+    line-height: 1.1;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding:  0 20px;
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+p {
+    text-shadow: 2px 2px 2px var(--text-shadow-color);
+    font-size: 2rem; 
+    color: var(--text-color);
+    text-align: center;
+    margin: 0; 
+    line-height: 1.5; /* เพิ่มระยะห่างบรรทัด */
+}
+
+p:nth-child(1){
+    color:var(--text-color);
+    margin-top: 5em;
+}
+
+button{
+    font-family: "Inria Serif", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+.goal{
+    padding: 12px 25px;
+    border-radius: 50px;
+    border: none;
+    color:var(--base-color);
+    font-size: 4rem;
+    margin: 1em 0px; 
+    cursor: pointer;
+    box-shadow: 0 4px 8px var(--box-shadow-color);
+    transition: all 0.2s linear;
+}
+
+.goal:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px var(--box-shadow-color);
+}
+@media(max-width: 768px){
+    h1 {
+        font-size: 6rem; /* กลับไปใช้ขนาดใหญ่ขึ้นสำหรับจอใหญ่ */
+    }
+    p {
+        font-size: 1.4rem;
+    }
+    p:nth-child(1){
+        margin-top: 1.2em;
+    }
+    .goal {
+        font-size: 2rem;
+    }
+}
+
+@media(max-width: 500px){
+    h1 {
+        font-size: 4rem; 
+    }
+    p {
+        font-size: 1rem;
+    }
+    p:nth-child(1){
+        margin-top: 8em;
+    }
+    .goal {
+        font-size: 1.8rem;
+    }
+}
+@media(max-width: 320px){
+    h1 {
+        font-size: 4rem; 
+    }
+    p {
+        font-size: 1rem;
+    }
+    p:nth-child(1){
+        margin-top: 2em;
+    }
+    .goal {
+        font-size: 1.8rem;
+    }
+}

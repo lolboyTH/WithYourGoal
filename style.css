@@ -1,0 +1,398 @@
+:root{
+  --base-color: #004e7f;
+  --text-color: white;
+  --background-pc-theme: url(./assets/img/lightbg_pc.png);
+  --hover-color: rgba(82, 189, 255, 0.3);
+  --box-shadow-color: rgb(0, 0, 0, 0.7);
+  --background-mobile-theme:url(./assets/img/bg_light.png);
+  --border-bottom-color: rgba(255,255,255,0.2);
+  --option-color: #0f3057;
+}
+body.darkmode{
+  --base-color: #3D4459;
+  --text-color: white;
+  --background-pc-theme: url(./assets/img/dark_pc.jpg);
+  --hover-color: rgba(87, 96, 130, 0.7);
+  --box-shadow-color: rgb(0, 0, 0, 0.7);
+  --background-mobile-theme:url(./assets/img/bg_dark.png);
+  --border-bottom-color: rgba(255,255,255,0.2);
+  --option-color: #2d3241;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Inria Serif", serif;
+    font-weight: 700;
+    font-style: normal;
+    background-image: var(--background-pc-theme);
+    background-size:cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.NL{
+  background-color:  var(--base-color);
+  border-bottom: 3px solid var(--text-color);
+  box-shadow: 0px 10px 0px var(--base-color);
+}
+.NL > ul{
+  width: 100%;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.titlebar{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.NL li{
+  height: 4em;
+  list-style: none;
+}
+.NL .linkhref{
+  height: 100%;
+  padding: 0 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  color: var(--text-color);
+}
+.NL .linkhref i{
+  font-size: 1.7rem;
+  width: 30px; 
+  text-align: center;
+}
+.NL  .linkhref span {
+  font-size: 1.7rem;
+}
+.NL .titlebar  .linkhref:hover{
+  background-color: var(--hover-color);
+}
+
+
+.NL .sidebar{
+  position: fixed;
+  top: 0; 
+  left: 0;
+  z-index: 5;
+  height: 100vh;
+  width: 250px;
+  background-color: var(--base-color);
+  box-shadow: -10px 0 10px var(--box-shadow-color);
+  list-style: none;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-shadow: 4px 4px 4px var(--box-shadow-color);
+}
+.NL .sidebar .head {
+  width: 100%;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 3px solid var(--text-color);
+}
+
+.NL .sidebar ul {
+  list-style: none;
+  width: 100%;
+  margin-top: 0px;
+}
+
+.NL .sidebar li {
+  width: 100%;
+  text-align: left;
+  
+}
+
+.NL .sidebar li .icon{
+  padding-left: 10px;
+  transform: translateX(-50%);
+  
+}
+.NL .sidebar a {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  font-family: "Inria Serif", serif;
+}
+
+.NL .sidebar a:hover {
+  background-color: var(--hover-color);
+  border-radius: 10px;
+}
+
+.NL .sidebar .link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+}
+.NL .sidebar .link a {
+  display: flex;
+  align-items: center;
+}
+.NL .sidebar .about {
+  display: flex;
+  padding: 0;
+  margin-top: auto;
+  margin-left: 0;
+  height: 3.5em; /* กำหนดความสูงที่แน่นอนให้ footer */
+  border-top: 3px solid var(--text-color); /* ใช้ border แทน .line2 */
+  display: flex;
+  justify-content: space-between; /* จัดไอคอนซ้ายสุด-ขวาสุด */
+  align-items: center;
+}
+.NL .sidebar .about i{
+  font-size: 1.8rem;
+}
+.NL .menu-button{
+  display: none;
+  cursor: pointer;
+}
+
+i, a{
+      color: var(--text-color);
+      font-size: 1.7rem;
+}
+.NL .login-btn{
+  border-radius: 50px;
+  width: auto;
+  height: 30px;
+  background-color: var(--text-color);
+  box-shadow: 2px 2px 4px var(--hover-color);
+  white-space: nowrap;
+  transition: transform 0.4s linear;
+  color: var(--base-color);
+}
+#theme-switch{
+  margin-left: auto;
+  cursor: pointer;
+}
+.NL .login-btn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px var(--hover-color);
+}
+.NL .logo{
+  cursor: default;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+
+/* --- Auth Container (ครอบส่วน Login/User) --- */
+.NL .auth-section {
+    display: flex;
+    align-items: center;
+    margin-right: 1em;
+    padding-left: 1em;
+}
+
+
+/* --- User Profile Section --- */
+.NL .user-profile {
+    position: relative; /* เพื่อให้ Dropdown อ้างอิงตำแหน่งจากตรงนี้ */
+    display: flex;
+    align-items: center;
+}
+
+.NL .user-icon {
+    font-size: 2.2rem; /* ขนาดไอคอน */
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.NL .user-icon:hover {
+    transform: scale(1.1);
+    transform: translateY(-2px);
+}
+
+/* --- Dropdown Menu --- */
+.NL .profile-dropdown {
+    position: absolute;
+    top: 70px; /* ระยะห่างจากไอคอนลงมา */
+    right: 0;  /* ชิดขวา */
+    width: 200px;
+    background-color: var(--base-color); /* สีพื้นหลังเมนู (สีน้ำเงินเข้ม) */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--box-shadow-color);
+    padding: 0px 0;
+    z-index: 2; /* ลอยทับทุกอย่าง */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* รายการในเมนู */
+.NL .dropdown-item {
+    padding: 12px 20px;
+    color: var(--text-color);
+    cursor: pointer;
+    height: 50px;
+    display: flex;
+    
+    align-items: center;
+    gap: 15px;
+    transition: background 0.2s;
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--border-bottom-color);
+    
+}
+.NL .profile-dropdown > a{
+  text-decoration: none;
+}
+
+.NL .dropdown-item:hover {
+    background-color: var(--hover-color);
+}
+
+.NL .dropdown-item i {
+    width: 20px;
+}
+
+.NL .logout-item {
+    border-bottom: 0px;
+    color: var(--text-color); /* สีแดงอ่อนสำหรับ Logout */
+}
+
+/* คลาสสำหรับซ่อน element */
+.hidden {
+    display: none !important;
+}
+
+/*Dark*/
+/* จัด layout ให้คำว่า Theme กับปุ่มเลือกอยู่ห่างกัน */
+.theme-item-container {
+    justify-content: space-between; /* ดันปุ่มไปขวาสุด */
+    position: relative; /* เพื่อให้ sub-menu อ้างอิงตำแหน่งได้ */
+}
+
+/* กล่องหุ้มปุ่ม */
+.theme-selector-wrapper {
+    position: relative;
+    margin-left: auto; /* ดันไปขวาสุด */
+}
+
+/* ปุ่ม Trigger (กรอบสี่เหลี่ยมแสดง Light/Dark) */
+.theme-select-trigger {
+    background: transparent;
+    border: 1px solid var(--border-bottom-color);
+    color: var(--text-color);
+    padding: 2px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 70px;
+    justify-content: space-between;
+}
+
+.theme-select-trigger:hover {
+    border-color: var(--text-color);
+    background: var(--border-bottom-color);
+}
+
+/* เมนูย่อย (Sub-menu) ที่ซ่อนอยู่ */
+.theme-options {
+    position: absolute;
+    top: 100%; /* อยู่ใต้ปุ่ม */
+    right: 0;
+    width: 100%; /* กว้างเท่าปุ่ม Trigger */
+    background-color: var(--option-color); /* สีเดียวกับ dropdown หลัก */
+    border: 1px solid var(--border-bottom-color);
+    border-radius: 5px;
+    margin-top: 5px;
+    overflow: hidden;
+    z-index: 1001;
+    box-shadow: 0 4px 10px var(--box-shadow-color);
+}
+
+/* รายการตัวเลือก (Light/Dark) */
+.theme-option {
+    padding: 5px 10px;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.theme-option:hover {
+    background-color: var(--border-bottom-color);
+}
+
+
+/*Dark*/
+#theme-switch{
+  padding: 0;
+  border: none;
+  background-color: var(--base-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#theme-switch i:last-child{
+  display: none;
+}
+.darkmode #theme-switch i:first-child{
+  display: none;
+}
+.darkmode #theme-switch i:last-child{
+  display: block;
+}
+
+
+/*Responsive Light*/
+@media(max-width: 768px){
+  .NL .hideOnMobile{
+    display: none;
+  }
+  .NL .menu-button{
+    display: flex;
+    align-items: center;
+    margin-left: 1em;
+  }
+}
+@media(max-width: 500px){
+  body{
+      background-image: var(--background-mobile-theme);
+      height: 100dvh;
+  }
+  .NL .sidebar{
+    width: 100%;
+  }
+  i, a{
+      color: var(--text-color);
+      font-size: 1.5rem;
+  }
+}
+@media(max-width: 320px){
+  body{
+        background-image: var(--background-mobile-theme);
+        height: 100dvh;
+  }
+  .NL .sidebar{
+    width: 100%;
+  }
+  i, a{
+      color: var(--text-color);
+      font-size: 1.5rem;
+  }
+}

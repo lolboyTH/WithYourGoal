@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ============== Meta Tags ============== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ============== Page Title ============== -->
+    <title>Goal</title>
+
+    <!-- ============== Font&Icon ============== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_drop_down" />
+
+    <!-- ============== Start  Stylesheet ============== -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/css/goal.css">
+    <!-- ============== Start  Script ============== -->
+    <script src="./assets/js/sidebar.js" defer></script>
+    <script src="./assets/js/darkmode2press.js" defer></script>
+    <script>
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+            alert("กรุณาเข้าสู่ระบบก่อนเข้าใช้หน้านี้");
+            window.location.href = "login.html";
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./assets/js/goal.js" defer></script>
+    <script src="./assets/js/login.js"></script>
+
+</head>
+<body>
+    
+  <!-- ==============nav bar all pages(responsive) ============== -->
+    <nav class="NL">
+        <ul class="sidebar">
+            <li class="head"><a class="linkhref" href="#"><i width="26" height="26" class="fa-solid fa-xmark"></i></a></li>
+            <ul class="link">
+                <li><a class="linkhref" href="index.html"><i class="fa-solid fa-house icon"></i><span>Home</span></a></li>
+                <li><a class="linkhref" href="goal.html"><i class="fa-solid fa-flag icon"></i><span>Goal</span></a></li>
+                <li><a class="linkhref" href="timer.html"><i class="fa-solid fa-clock icon"></i><span>Timer</span></a></li>
+            </ul>
+            <ul class="about">
+                <li><a class="linkhref" href="about.html"><i class="fa-solid fa-circle-info"></i></a></li>
+                <li><a class="linkhref" href="#">
+                    <button id="theme-switch">
+                        <i class="fa-solid fa-sun"></i>
+                        <i class="fa-solid fa-moon"></i>
+                    </button></a>
+                </li>
+            </ul>
+        </ul>
+
+        <ul>
+            
+            <ul class="mainIcon">
+                <li class="menu-button"><i width="26" height="26" class="fa-solid fa-bars"></i></a></li>     
+            </ul>
+            <li class="logo"><a class="linkhref">GOAL</a></li>
+            <ul class="titlebar">
+                <li class="hideOnMobile"><a class="linkhref" href="index.html">Home</a></li>
+                <li class="hideOnMobile"><a class="linkhref" href="goal.html">Goal</a></li>
+                <li class="hideOnMobile"><a class="linkhref" href="timer.html">Timer</a></li>
+            </ul>
+
+            <div class="auth-section" id="auth-section">    
+                <a class="linkhref login-btn" href="login.html" id="login-btn">Login</a>
+
+                <div class="user-profile hidden" id="user-profile">
+                    <i class="fa-solid fa-circle-user user-icon" id="user-icon-trigger"></i>
+                    
+                    <ul class="profile-dropdown hidden" id="profile-dropdown">
+                        <a class="profilehref" href="profile.html">
+                            <li class="dropdown-item">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span>Profile</span>
+                            </li>
+                        </a>
+
+                        <li class="dropdown-item theme-item-container">
+                            <i class="fa-solid fa-circle-half-stroke"></i>
+                            <span>Theme</span>
+                            <div class="theme-selector-wrapper">
+                                <button class="theme-select-trigger" id="theme-select-trigger">
+                                    <span id="current-theme-text">Light</span>
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </button>
+
+                                <div class="theme-options hidden" id="theme-options">
+                                    <div class="theme-option" data-value="light">Light</div>
+                                    <div class="theme-option" data-value="dark">Dark</div>
+                                </div>
+                            </div>
+                            
+                        </li>
+                        <li class="dropdown-item logout-item" id="logout-btn">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span>Log out</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        
+
+        </ul>
+    </nav>
+
+    <!-- ==============Goal content ============== -->
+    <main class="goal-container">
+        <div class="header-section">
+            
+            <div class="health-badge" id="category-trigger">
+                <span id="current-category-text">Health</span>
+                <span class="material-symbols-outlined">arrow_drop_down</span>
+            </div>
+
+            <!-- ============== hidden menu ============== -->
+            <div class="category-menu hidden" id="category-menu">
+                <div class="menu-list scrollable" id="category-list"></div>
+                
+                <div class="menu-footer" id="add-category-btn">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+            </div>
+
+            <div class="goal-navigator">
+                <i class="fa-solid fa-chevron-left nav-arrow" id="prev-goal-btn"></i>
+                <input type="text" class="goal-input" value="45 kg" placeholder="Enter Goal" maxlength="20">
+                <i class="fa-solid fa-chevron-right nav-arrow" id="next-goal-btn"></i>
+            </div>
+            <i class="fa-solid fa-trash delete-goal-main-btn" id="delete-goal-btn" title="ลบเป้าหมายนี้"></i>
+        </div>
+
+        <hr>
+
+        <div class="card rule-card">
+            <div class="card-header">
+                <div class="title-group">
+                    <span>Rule</span>&nbsp;
+                    <div class="hearts-container" id="hearts">
+                        <i class="fa-solid fa-heart"></i>
+                        <i class="fa-solid fa-heart"></i>
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                </div>
+                <button class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="card-body scrollable" id="rule-list">
+                <div class="list-item">
+                    <span>• ไม่กินของหวาน</span>
+                    <i class="fa-solid fa-trash delete-icon"></i>
+                </div>
+                <div class="list-item">
+                    <span>• ออกกำลังกายทุกวัน</span>
+                    <i class="fa-solid fa-trash delete-icon"></i>
+                </div>
+                <div class="list-item">
+                    <span>• นอน 22.00</span>
+                    <i class="fa-solid fa-trash delete-icon"></i>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+        </div>
+
+        <div class="card process-card">
+            <div class="card-header">
+                <span>Process</span>
+            </div>
+            
+            <div class="card-body scrollable" id="process-list">
+                <div class="list-item">
+                    <label class="checkbox-container">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                    <span class="text">Cardio 1 ชม.</span>
+                    </label>
+                    <i class="fa-solid fa-trash delete-icon"></i>
+                </div>
+                <div class="list-item">
+                    <label class="checkbox-container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="text">วิ่ง 1 km</span>
+                    </label>
+                    <i class="fa-solid fa-trash delete-icon"></i>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+        </div>
+
+        <div class="fab-btn" id="add-new-goal-btn">
+            <i class="fa-solid fa-plus"></i>
+        </div>
+    </main>
+  
+</body>
+</html>

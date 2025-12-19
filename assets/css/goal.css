@@ -1,0 +1,667 @@
+:root{
+    --base-color: #004e7f;
+    --text-color: white;
+    --box-shadow-color: rgb(0, 0, 0, 0.5);
+    --heart-color: rgb(255, 0, 0);
+    --background-color: rgba(235, 242, 247, 0.8);
+    --border-color: rgba(0,0,0,0.05);
+    --hover-color: rgba(255,255,255,0.5);
+    --black-color: black;
+    --scroll-color: rgb(0, 0, 0, 0.1);
+    --list-color: rgb(0, 0, 0, 0.05);
+    --delete-icon-color: rgb(0, 0, 0, 0.3);
+    --inline-input-color: rgba(0, 78, 127, 0.5);
+}
+body.darkmode{
+    --base-color: #3D4459;
+    --text-color: white;
+    --box-shadow-color: rgb(0, 0, 0, 0.5);
+    --heart-color: #FF686A;
+    --background-color: rgba(235, 242, 247, 0.8);
+    --border-color: rgba(0,0,0,0.05);
+    --hover-color: rgba(255,255,255,0.7);
+    --black-color: black;
+    --scroll-color: rgb(0, 0, 0, 0.1);
+    --list-color: rgb(0, 0, 0, 0.05);
+    --delete-icon-color: rgb(0, 0, 0, 0.3);
+    --inline-input-color: rgb(61, 68, 89, 0.5);
+}
+
+.goal-container {
+    position: relative;
+    padding: 80px 20px 20px 20px; /* เว้นด้านบนเผื่อ Navbar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    color: var(--text-color);
+    max-width: 50em;
+    margin: 0 auto;
+    
+}
+
+/* --- Header Section --- */
+.header-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.health-badge {
+    font-family: serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: var(--text-color);
+    color: var(--base-color);
+    width: 100%;
+    height: 50px;
+    padding: 0px 20px;
+    border-radius: 10px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px var(--box-shadow-color);
+    cursor: pointer;
+    user-select: none;
+}
+.health-badge .material-symbols-outlined {
+    position: absolute;      
+    right: 15px;            
+    font-size: 2rem;         
+}
+
+/*new*/
+/* กล่องเมนู (Dropdown) */
+.category-menu {
+    position: absolute;
+    top: 60px; /* ระยะห่างจากด้านบน */
+    left: 0;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--background-color); /* สีพื้นหลังขาวฟ้าจางๆ เหมือนในรูป */
+    backdrop-filter: blur(5px); /* เบลอฉากหลัง */
+    border-radius: 15px;
+    box-shadow: 0 4px 15px var(--box-shadow-color);
+    padding: 20px 0;
+    z-index: 101;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    /* Animation ตอนเปิด */
+    transition: all 0.3s ease;
+    transform-origin: top;
+}
+
+/* คลาสสำหรับซ่อนเมนู */
+.category-menu.hidden {
+    display: none;
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+.menu-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* รายการในเมนู */
+.menu-item {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 12px 10px;
+    margin-bottom: 5px;
+    color: var(--base-color); /* สีน้ำเงินเข้มตามรูป */
+    font-family: serif; /* ฟอนต์แบบมีหัวตามรูป */
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.2s
+}
+
+.menu-item:hover {
+    background-color: var(--hover-color);
+    border-radius: 8px;
+}
+
+.menu-item .delete-cat-btn {
+    position: absolute;
+    right: 10px;
+    color: var(--heart-color);
+    font-size: 1rem;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.menu-item .delete-cat-btn:hover {
+    opacity: 1;
+}
+
+/* ปุ่มบวกด้านล่างเมนู */
+.menu-footer {
+    margin-top: 15px;
+    width: 80%;
+    height: 40px;
+    background: var(--text-color);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--heart-color); /* สีแดงเข้ม */
+    box-shadow: 0 2px 5px var(--box-shadow-color);
+    transition: transform 0.1s;
+}
+
+.menu-footer:active {
+    transform: scale(0.95);
+}
+/*end*/
+
+.goal-input {
+    background: transparent;
+    border: none;
+    text-align: center;
+    font-family: "Inria Serif", serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--text-color);
+    width: 100%;
+    outline: none;
+    text-shadow: 2px 2px 4px var(--box-shadow-color);
+    flex-grow: 1; /* กินพื้นที่ตรงกลางให้หมด */
+    margin: 0 30px;
+    outline: none; /* ลบเส้นขอบเวลากด */
+
+}
+.goal-input::placeholder {
+    color: var(--hover-color);
+    font-size: 2rem;
+}
+.goal-navigator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* ให้ลูกศรชิดขอบ ตัวหนังสืออยู่กลาง */
+    width: 600px;
+    margin-top: 15px;
+}
+.nav-arrow {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 1;
+    transition: all 0.2s;
+    padding: 10px; /* เพิ่มพื้นที่กดให้ง่ายขึ้นในมือถือ */
+    text-shadow: 2px 2px 5px var(--black-color);
+    font-weight: 900;
+}
+
+.nav-arrow:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* ถ้าอยากให้ซ่อนลูกศรเมื่อมีแค่ 1 เป้าหมาย (เดี๋ยวใช้ JS สั่ง class นี้) */
+.nav-arrow.disabled {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+/* --- 2. ปุ่มบวกมุมขวาล่าง (Floating Action Button - FAB) --- */
+.fab-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--text-color);
+    color: var(--base-color); /* สีธีมของคุณ */
+    border-radius: 50%; /* ทำเป็นวงกลม */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    box-shadow: 0 4px 10px var(--box-shadow-color);
+    cursor: pointer;
+    z-index: 4; /* ให้ลอยเหนือทุกอย่าง */
+    transition: transform 0.2s;
+}
+
+.fab-btn:hover {
+    transform: scale(1.1) rotate(90deg); /* หมุนเล่นๆ ตอนเอาเมาส์ชี้ */
+}
+
+.fab-btn:active {
+    transform: scale(0.9);
+}
+
+hr{
+    background-color: var(--text-color);
+    height: 5px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    border: 2px solid var(--text-color);
+    margin-top: 0;
+}
+
+/* --- Cards Common Style --- */
+.card {
+    background: var(--background-color); /* สีขาวโปร่งแสง */
+    backdrop-filter: blur(4px); /* เบลอฉากหลัง */
+    border-radius: 15px;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 0 4px 15px var(--box-shadow-color);
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--background-color);
+    position: relative;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    font-size: 1.5rem;
+    color: var(--base-color);
+    text-shadow: 1px 1px 2px var(--box-shadow-color);
+}
+
+.title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hearts-container {
+    color: var(--heart-color);
+    display: flex;
+    gap: 5px;
+    font-size: 1.2rem;
+}
+
+.fa-heart {
+    color: var(--heart-color);
+}
+.fa-plus {
+    color: var(--heart-color);
+}
+
+.close-btn {
+    background: var(--heart-color);
+    border: none;
+    color: var(--text-color);
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 4px var(--box-shadow-color);
+}
+
+.close-btn:active {
+    transform: scale(0.95);
+}
+
+/* --- List Items & Scrolling --- */
+.card-body.scrollable {
+    max-height: 120px; /* กำหนดความสูงเพื่อให้เกิด Scroll */
+    overflow-y: auto;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    color: var(--black-color); /* สีตัวหนังสือในกล่อง */
+    font-size: 1rem;
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+}
+
+/* Custom Scrollbar ให้เหมือนรูป */
+.scrollable::-webkit-scrollbar {
+    width: 6px;
+}
+.scrollable::-webkit-scrollbar-track {
+    background: var(--scroll-color);
+    border-radius: 10px;
+}
+.scrollable::-webkit-scrollbar-thumb {
+    background: var(--base-color);
+    border-radius: 10px;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--list-color);
+}
+
+.delete-icon {
+    color: var(--delete-icon-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+.delete-icon:hover {
+    color: var(--heart-color);
+}
+
+/* --- Process Checkbox Style --- */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    padding-left: 30px;
+    user-select: none;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: var(--text-color);
+    border-radius: 4px;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--base-color);
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+.checkbox-container .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--text-color);
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.menu-footer i,      /* ไอคอนในปุ่มเพิ่มหมวดหมู่ */
+.card-footer i,      /* ไอคอนในปุ่มเพิ่ม Rule/Process */
+.fab-btn i           /* ไอคอนในปุ่มเพิ่ม Goal ใหญ่ */
+{
+    pointer-events: none; 
+}
+
+/* --- Footer Add Button --- */
+.card-footer {
+    background: var(--text-color);
+    border-radius: 8px;
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+    color: var(--heart-color);
+    font-size: 1.2rem;
+    transition: background 0.2s;
+}
+
+.card-footer:hover,  .menu-footer:hover{
+    background: var(--hover-color);
+}
+
+/* new */
+/* จัดการข้อความในรายการให้ขึ้นบรรทัดใหม่ */
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* เปลี่ยนจาก center เป็น flex-start เพื่อให้ icon อยู่บนสุดถ้าข้อความยาว */
+    padding: 10px; /* เพิ่ม padding ให้หายใจสะดวก */
+}
+
+/* เจาะจงไปที่ตัวหนังสือใน list-item */
+.list-item span, 
+.list-item .text {
+    flex: 1; /* ให้ข้อความขยายเต็มพื้นที่ที่เหลือ */
+    white-space: normal; /* อนุญาตให้ขึ้นบรรทัดใหม่ */
+    word-break: break-word; /* ถ้าคำยาวมากๆ ให้ตัดคำลงมา */
+    overflow-wrap: break-word; /* รองรับ Browser รุ่นใหม่ */
+    line-height: 1.4; /* เพิ่มความสูงบรรทัดให้อ่านง่าย */
+    margin-right: 10px; /* เว้นระยะห่างจากถังขยะนิดนึง */
+    text-align: left;
+}
+
+/* ปรับตำแหน่งถังขยะให้ดูดีขึ้นเมื่อข้อความมีหลายบรรทัด */
+.list-item .delete-icon {
+    margin-top: 3px; /* ดันลงมานิดนึงให้ตรงกับบรรทัดแรก */
+    flex-shrink: 0; /* ห้ามถังขยะโดนบีบให้เล็กลง */
+}
+
+/* new */
+/* เดิม goal-input ของคุณน่าจะมีขนาดใหญ่อยู่แล้ว */
+.goal-input {
+    margin: 0.5em 0;
+    transition: font-size 0.2s ease; /* ใส่เพื่อให้ตอนลดขนาดดูลื่นไหล */
+}
+
+.goal-input.smaller-text {
+    margin: 0.9em 0;
+    font-size: 2.5rem !important; 
+}
+.goal-input.smaller-text.smallest-text {
+    margin: 0.9em 0;
+    font-size: 1.5rem !important; 
+}
+
+.process-card{
+    margin-bottom: 6em;
+}
+
+/* --- Inline Input Styles (ช่องพิมพ์ข้อความแบบแทรก) --- */
+.inline-input-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inline-input {
+    width: 90%;
+    border: none;
+    border-bottom: 2px solid var(--base-color);
+    outline: none;
+    background: transparent;
+    font-family: "Nunito", sans-serif; /* ฟอนต์เดียวกับเนื้อหา */
+    font-size: 1rem;
+    color: var(--base-color);
+    text-align: center;
+    padding: 5px;
+}
+
+.inline-input::placeholder {
+    color: var(--inline-input-color);
+}
+
+/* --- Modal สำหรับปุ่ม FAB (New Goal) --- */
+/* เนื่องจากปุ่มขวาล่างเป็นวงกลม การพิมพ์ในปุ่มเลยจะยาก เราจะทำเป็น Pop-up สวยๆ ตรงกลางแทน */
+.custom-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--box-shadow-color);
+    backdrop-filter: blur(3px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.2s ease;
+}
+
+.custom-modal-box {
+    background: var(--text-color);
+    padding: 20px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px var(--delete-icon-color);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.custom-modal-title {
+    color: var(--base-color);
+    font-family: "Inria Serif", serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.custom-modal-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--text-color);
+    border-radius: 8px;
+    font-size: 1.2rem;
+    outline: none;
+    text-align: center;
+    border-color: var(--base-color);
+}
+
+.custom-modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-confirm, .btn-cancel {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.1s;
+}
+
+.btn-confirm {
+    background: var(--base-color);
+    color: var(--text-color);
+}
+
+.btn-cancel {
+    background: var(--text-color);
+    color: var(--black-color);
+}
+
+.btn-confirm:active, .btn-cancel:active {
+    transform: scale(0.95);
+}
+
+/* ปุ่มลบเป้าหมาย (อยู่มุมขวาของ Header Section) */
+.delete-goal-main-btn {
+    position: absolute;
+    right: 7px;           /* ชิดขวาสุด */
+    bottom: 0px;       /* ปรับความสูงให้อยู่ระนาบเดียวกับ Input */
+    font-size: 1.2rem;
+    color: var(--text-color);
+    opacity: 0.3;       /* จางๆ ไว้ก่อนเพื่อไม่ให้เด่นเกิน */
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 3;
+}
+
+.delete-goal-main-btn:hover {
+    opacity: 1;
+    color: var(--heart-color); /* เปลี่ยนเป็นสีแดงเมื่อชี้ */
+    transform: scale(1.1);
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media(max-width: 950px){
+    .goal-container, .goal-navigator {
+        max-width: 40em; 
+    }
+}
+@media(max-width: 768px){
+    .goal-container {
+        max-width: 30em; 
+    }
+}
+@media(max-width: 500px){
+    .goal-container, .goal-navigator {
+
+        max-width: 20em; 
+    }
+    .goal-input {
+        font-size: 2rem
+    }
+    
+    .delete-goal-main-btn {
+        bottom: 0; /* ขยับลงมาหน่อยถ้าจอเล็ก */
+    }
+}
+@media(max-width: 320px){
+    .goal-container, .goal-navigator{
+        width: 100%;
+        max-width: 300px; 
+    }
+    .goal-input {
+        font-size: 1.8rem
+    }
+
+    .goal-input.smaller-text {
+        margin: 0.9em 0;
+        font-size: 1.5rem !important; 
+    }
+    .goal-input.smaller-text.smallest-text {
+        margin: 0.9em 0;
+        font-size: 1rem !important; 
+    }
+    .card-header{
+        font-size: 1.2rem;
+    }
+    .list-item span, .list-item i{
+        font-size: 0.9rem;
+    }
+    .hearts-container i{
+        font-size: 1.4rem;
+    }
+    .delete-goal-main-btn {
+        font-size: 0.8rem;
+    }
+    
+}

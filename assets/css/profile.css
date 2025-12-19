@@ -1,0 +1,170 @@
+:root{
+  --base-color: #004e7f;
+  --background-color: rgb(0, 58, 95);
+  --text-color: white;
+  --hover-color: rgba(255,255,255, 0.2);
+  --black-color: rgb(0, 0, 0);
+  --border-color-focus: #81d4fa;
+}
+body.darkmode{
+  --base-color: #3D4459;
+  --background-color: #2a2f3e;;
+  --text-color: white;
+  --hover-color: rgba(255,255,255, 0.2);
+  --black-color: rgb(0, 0, 0);
+  --border-color-focus: #c0cfff;
+}
+
+body{
+    background: linear-gradient(90deg,var(--background-color) 0%, var(--background-color) 100%);
+}
+.container {
+    max-width: 50em; /* จำกัดความกว้างไม่ให้ใหญ่เกินไปเหมือนมือถือ */
+    margin: 2em auto;
+}
+
+/* หัวข้อหน้า */
+.page-title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    color: var(--text-color);
+   
+}
+
+/* ส่วนรูปโปรไฟล์ */
+.profile-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.avatar-icon {
+    font-size: 100px; /* ขนาดไอคอนรูปคน */
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border-radius: 50%;
+}
+
+/* ส่วนฟอร์ม (Username/Email) */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.input-row {
+    display: flex;
+    gap: 15px;
+}
+
+input {
+    flex-grow: 1; /* ยืดเต็มพื้นที่ */
+    background-color: transparent; /* พื้นหลังใส */
+    border: 1px solid var(--text-color);
+    padding: 10px;
+    color: var(--text-color);
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* เปลี่ยนสีขอบเมื่อกำลังพิมพ์ */
+input:focus {
+    border-color: var(--border-color-focus); 
+    background-color: var(--hover-color);
+}
+
+.btn-edit {
+    background-color: var(--text-color);
+    color: var(--black-color);
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 80px;
+}
+
+/* ส่วน Stats (Goal) */
+.stats-section {
+    margin-top: 30px;
+}
+
+.section-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.card {
+    background-color: var(--text-color);
+    color: var(--black-color);
+    width: 48%; /* แบ่งครึ่ง */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1; /* ให้เป็นสี่เหลี่ยมจัตุรัส */
+}
+
+.card .number {
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--black-color);
+}
+
+.card .label {
+    font-size: 14px;
+    color: var(--black-color);
+    margin-top: 5px;
+}
+
+/* ส่วน About Me */
+.about-section {
+    margin-top: 30px;
+    padding-bottom: 30px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+@media(max-width: 768px){
+    .container {
+        max-width: 30em; 
+    }
+}
+@media(max-width: 500px){
+    .container {
+        max-width: 20em; 
+    }
+  
+}
+@media(max-width: 320px){
+    .container {
+        max-width: 300px; 
+    }
+  
+}
